@@ -12,6 +12,7 @@
       $this->conn = null;
 
       try { 
+        //pdo driver de conexion a base de datos
         $this->conn = new PDO('mysql:host=' . $this->host . ';dbname=cecytea', $this->username, $this->password);
         $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
       } catch(PDOException $e) {
