@@ -2,7 +2,7 @@
     class Paquete{
         // DB stuff
         private $conn;
-        private $table = 'datos';
+        private $table = 'paquete';
 
         // Post Properties
         public $fecha;
@@ -58,8 +58,7 @@
         // Create Post
         public function create() {
             // Create query
-            $query = 'INSERT INTO ' . $this->table . ' SET fecha = :fecha, latitud = :latitud, longitud = :longitud, temt = :temt, humr=: humr';
-
+            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr ';
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 
@@ -67,21 +66,22 @@
             $this->fecha = htmlspecialchars(strip_tags($this->fecha));
             $this->latitud = htmlspecialchars(strip_tags($this->latitud));
             $this->longitud = htmlspecialchars(strip_tags($this->longitud));
+            $this->altitud = htmlspecialchars(strip_tags($this->altitud));
             $this->temt = htmlspecialchars(strip_tags($this->temt));
             $this->humr = htmlspecialchars(strip_tags($this->humr));
-
             // Bind data
             $stmt->bindParam(':fecha', $this->fecha);
             $stmt->bindParam(':latitud', $this->latitud);
             $stmt->bindParam(':longitud', $this->longitud);
             $stmt->bindParam(':altitud', $this->altitud);
-            $stmt->bindParam(':temt', $this->altitud);
-            $stmt->bindParam(':humr', $this->altitud);
+            $stmt->bindParam(':temt', $this->temt);
+            $stmt->bindParam(':humr', $this->humr);
 
+            //$stmt->execute();
             // Execute query
             if($stmt->execute()) {
-                return true;
-        }
+               return true;
+            }
 
         // Print error if something goes wrong
         printf("Error: %s.\n", $stmt->error);

@@ -1,0 +1,8 @@
+http://localhost:8080/cecytea/api/paquete/create.php?f=2019/03/06%2000:00:00&la=32.33422&ln=-118.222324&al=500&t=23.2$h=60
+ $query = 'INSERT INTO ' . $this->table . ' (fecha,latitud,longitud,altitud,temt,humr) values (fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr) ';
+$post->fecha = parse_str($_GET['f'], $fecha);
+  $post->latitud = parse_str($_GET['la'], $latitud);
+  $post->longitud = parse_str($_GET['ln'], $longitud);
+  $post->altitud = parse_str($_GET['al'], $altitud);
+  $post->temt = parse_str($_GET['t'], $temt);
+  $post->humr = parse_str($_GET['h'], $humr);
