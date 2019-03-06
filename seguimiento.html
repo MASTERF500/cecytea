@@ -7,7 +7,6 @@
         float: left;
         border: thin solid #333;
         margin: auto;
-        flex-align: center;
     }
 </style>
 <div class="container">
@@ -47,10 +46,10 @@
     
     
     function initMap() {
-        var mapOptions = { zoom: 4, center: origin };
+        var mapOptions = { zoom: 18, center: origin };
         var map = new google.maps.Map(document.getElementById('map'), {
             zoom: 7,
-            center: { lat: 18.890266, lng: -101.465673 }
+            center: { lat: 22.890266, lng: -100.465673 }
         });
         infowindow = new google.maps.InfoWindow();
 
