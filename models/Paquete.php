@@ -20,7 +20,7 @@
         // Get Posts
         public function read() {
         // Create query
-        $query = 'SELECT  t.fecha,t.altitud,t.longitud,t.altitud,t.temt,t.humr  FROM ' . $this->table . ' t order by t.fecha';
+        $query = 'SELECT  t.fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr  FROM ' . $this->table . ' t order by t.fecha';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -30,11 +30,22 @@
 
         return $stmt;
         }
+        public function read_ultimos_num($num) {
+            // Create query
+            $query = 'SELECT fecha,latitud,longitud,altitud,temt,humr  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
+            // Prepare statement
+            $stmt = $this->conn->prepare($query);
+    
+            // Execute query
+            $stmt->execute();
+    
+            return $stmt;
+            }
 
         // Get Single Post ( se modifico el nombre) ************
         public function read_single_ultimate() {
             // Create query
-            $query = 'SELECT max(t.fecha) as ultima_fecha,t.altitud,t.longitud,t.altitud,t.temt,t.humr FROM ' . $this->table . ' t ';
+            $query = 'SELECT max(fecha) as ultima_fecha,latitud,longitud,altitud,temt,humr FROM ' . $this->table ;
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -53,6 +64,7 @@
             $this->altitud = $row['altitud'];
             $this->temt = $row['temt'];
             $this->humr = $row['humr'];
+            return $row;
         }
 
         // Create Post

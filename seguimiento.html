@@ -1,0 +1,87 @@
+
+<style>
+    #map {
+        height: 800px;
+        width: 1200px;
+        overflow: hidden;
+        float: left;
+        border: thin solid #333;
+        margin: auto;
+        flex-align: center;
+    }
+</style>
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    function GetMaster(yourUrl){
+    var Httpreq = new XMLHttpRequest();
+    Httpreq.open("GET",yourUrl,false);
+    Httpreq.send(null);
+    return Httpreq.responseText;          
+}
+</script>
+
+
+<script type='text/javascript'>
+    var map;
+    var Markers = {};
+    var infowindow;
+
+    function getUrlVars() {
+        var vars = {};
+        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+            vars[key] = value;
+        });
+        return vars;
+    }
+    var cant = getUrlVars()["cant"];
+
+    var locations = JSON.parse(GetMaster('http://10.20.55.227:8080/cecytea/api/paquete/read_ultimos_num.php?cant='+cant));
+    
+    
+    function initMap() {
+        var mapOptions = { zoom: 4, center: origin };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: { lat: 18.890266, lng: -101.465673 }
+        });
+        infowindow = new google.maps.InfoWindow();
+
+        for (i = 0; i < locations.length; i++) {
+            var position = new google.maps.LatLng(locations[i].latitud, locations[i].longitud);
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map,
+            });
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    var contenidoLabel = "<div> <b>Fecha:</b> " + locations[i].fecha + "<br><b>Latitud</b>: " + locations[i].latitud + "<br><b>Longitud:</b> " + locations[i].longitud+ "<br><b>Altitud:</b> " + locations[i].altitud+ "<br><b>Temperatura:</b> " + locations[i].temt+ "<br><b>Humedad Relativa:</b> " + locations[i].humr+ "<br> </div>";
+                    infowindow.setContent(contenidoLabel);
+                    infowindow.setOptions({ maxWidth: 200 });
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+            Markers[i] = marker;
+        }
+        locate(0);
+    }
+
+    function locate(marker_id) {
+        var myMarker = Markers[marker_id];
+        var markerPosition = getPosition(myMarker);
+        map.setCenter(markerPosition);
+        google.maps.event.trigger(myMarker, 'click');
+    }
+    
+</script>
+
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmZCnSJBCnBrJ2V70CIbX27A0yFl-06A0&callback=initMap">
+</script>
