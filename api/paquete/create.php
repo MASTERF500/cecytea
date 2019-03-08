@@ -13,8 +13,7 @@
 
   // Instantiate blog post object
   $post = new Paquete($db);
-  echo $_GET['f'];
-  //get parameters from url
+   //get parameters from url
   //$parts = parse_url($url);
   
 
