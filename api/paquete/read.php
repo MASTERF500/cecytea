@@ -33,12 +33,16 @@
         'longitud' => $longitud,
         'altitud' => $altitud,
         'temt' => $temt,
-        'humr' => $humr
+        'humr' => $humr,
+        'CO2'  => $CO2,
+        'TVOC' => $TVOC,
+        'AP'   => $AV,
+        'VOL'  => $VOL
       );
 
       // Push to "data"
       array_push($posts_arr, $post_item);
-      // array_push($posts_arr['data'], $post_item);
+      // array_push($posts_arr['data'], $post_item);    http://localhost:8080/cecytea/API/Paquete/read.php
     }
 
     // Turn to JSON & output

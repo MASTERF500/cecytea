@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+table, th, td {
+  border: 2px solid red;
+}
+</style>
+</head>
+<body onload="getUrlVars()">
+
+<table style="width:100%">
+  <tr>
+    <th> fecha</th>
+    <th>Laltitud</th> 
+    <th>Longitud</th>
+    <th>Altitud</th>
+    <th>Temperatura</th>
+    <th>Humedad</th>
+  </tr>
+  <tr>
+    <td><span id="fecha"></span></td>
+        <td><span id="Laltitud"></td>
+            <td><span id="longitud"></td>
+                <td><span id="altitud"></td>
+                    <td><span id="temp"></td>
+                        <td><span id="humr"></td>
+
+  </tr>
+  <tr>
+    <td>Eve</td>
+    <td>Jackson</td>
+    <td>94</td>
+  </tr>
+  <tr>
+    <td>John</td>
+    <td>Doe</td>
+    <td>80</td>
+  </tr>
+</table>
+
+
+
+
+
+
+<script>
+        function GetMaster(yourUrl){
+        var Httpreq = new XMLHttpRequest();
+        Httpreq.open("GET",yourUrl,false);
+        Httpreq.send(null);
+        return Httpreq.responseText;          
+    }
+    </script>  
+
+    <script type='text/javascript'>
+        var map;
+        var Markers = {};
+        var infowindow;
+        var acum="";
+        function getUrlVars() {
+            var vars = {}; 
+            var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+                vars[key] = value;
+            });
+            return vars;
+        }
+        var cant = getUrlVars()["cant"];
+    
+        var locations = JSON.parse(GetMaster('http://Localhost:8080/cecytea/api/paquete/read_ultimos_num.php?cant='+cant)); //Recordar Agregar http:// en local
+           for (i = 0; i < locations.length; i++) {
+                acum+= "Fecha: " + locations[i].fecha + " Latitud: " + locations[i].latitud + " Longitud: " + locations[i].longitud+ " Altitud: " + locations[i].altitud+ " Temperatura: " + locations[i].temt+ " Humedad Relativa: " + locations[i].humr+ "<br> ";
+            
+           // document.getElementById("tabla").value = ""+acum;   //Lamar la funcion  http://localhost:8080/cecytea/consulta.html?cant=1 
+           document.getElementById("fecha").innerHTML = locations[i].fecha;
+           document.getElementById("Laltitud").innerHTML = locations[i].Laltitud;
+           document.getElementById("longitud").innerHTML = locations[i].longitud;
+           document.getElementById("altitud").innerHTML = locations[i].altitud;
+           document.getElementById("temt").innerHTML = locations[i].temt;
+           document.getElementById("humr").innerHTML = locations[i].humr;
+           
+           }
+    </script>
+</body>
+</html>
+

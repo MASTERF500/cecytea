@@ -1,6 +1,35 @@
-<head>
-</head>
 
+<style>
+    #map {
+        height: 800px;
+        width: 1200px;
+        overflow: hidden;
+        float: left;
+        border: thin solid #333;
+        margin: auto;
+        border-width: medium;
+    }
+</style>
+</style>
+<body>
+        <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div id="wrapper">
+  
+    <p id="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
+    <p id="title" contenteditable="true" spellcheck="false"><span>CATSAT</span><span></span><span></span></p>
+    <p id="slogan"><span>LOCALIZACION</span></p>
+    <p id="slogan"><span>CECYTEA SJG </span><span></span></p>
+  </div>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-12">
+            <div id="map"></div>
+        </div>
+    </div>
+</div>
+<body></body>
 <style>
     h1 {
         text-align: center;
@@ -8,25 +37,12 @@
     }
 </style>
 
-<body>
-    <div id="wrapper">
-
-            <p id="stars"><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span><span>&#9733;</span></p>
-            <p id="title" contenteditable="true" spellcheck="false"><span>CATSAT</span></p>
-            <p id="slogan"><span>CONSULTA </span><span>DE DATOS</span> <br>
-            <p id="slogan"><span>CECYTEA SJG</span></p>
-          </div>
-          
-
-<textarea  background="none" id="tabla" rows="50" cols="130"></textarea> 
-</body>
-
 
 <style>
         html {
             height: 100%;
             font: 62.5%/1 "Lucida Sans Unicode","Lucida Grande",Verdana,Arial,Helvetica,sans-serif;
-            background: url(background.jpeg);
+            background:url(background.jpeg) repeat;
           }
           
           body {
@@ -48,7 +64,7 @@
           span { 
             text-shadow: -0.06em 0 red,  0.06em 0 blue; /* This creates the 3D effect, pretty easy, eh? */
             letter-spacing: 0.08em; /* make sure the letters don't overlap */
-          }
+          }     
           
           p {
             margin: 0;
@@ -118,8 +134,9 @@
           
           /* ---------------- Slogan ---------------- */
           
-          #slogan { font-size: 0.25em; }
+          #slogan { font-size: 1cm; }
           #slogan span:active { text-shadow: none; }
+        
           
           
           
@@ -141,6 +158,7 @@
           #meta img { vertical-align: text-bottom; }
         </style>
 
+
 <script>
     function GetMaster(yourUrl){
     var Httpreq = new XMLHttpRequest();
@@ -155,7 +173,7 @@
     var map;
     var Markers = {};
     var infowindow;
-    var acum="";
+
     function getUrlVars() {
         var vars = {};
         var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
@@ -165,11 +183,45 @@
     }
     var cant = getUrlVars()["cant"];
 
-    var locations = JSON.parse(GetMaster('http://Localhost:8080/cecytea/api/paquete/read_ultimos_num.php?cant='+cant)); //Recordar Agregar http:// en local
-       for (i = 0; i < locations.length; i++) {
-            acum+= "Fecha: " + locations[i].fecha + " Latitud: " + locations[i].latitud + " Longitud: " + locations[i].longitud+ " Altitud: " + locations[i].altitud+ " Temperatura: " + locations[i].temt+ " Humedad Relativa: " + locations[i].humr+ " CO2 " + locations[i].CO2+ " TVOC " + locations[i].TVOC+ " PA " + locations[i].PA+ " VOL " + locations[i].VOL+ " <br> ";
+    var locations = JSON.parse(GetMaster('http://Localhost:8080/cecytea/api/paquete/read_ultimos_num.php?cant='+cant));
+    
+    
+    function initMap() {
+        var mapOptions = { zoom: 18, center: origin };
+        var map = new google.maps.Map(document.getElementById('map'), {
+            zoom: 7,
+            center: { lat: 22.890266, lng: -100.465673 }
+        });
+        infowindow = new google.maps.InfoWindow();
+
+        for (i = 0; i < locations.length; i++) {
+            var position = new google.maps.LatLng(locations[i].latitud, locations[i].longitud);
+            var marker = new google.maps.Marker({
+                position: position,
+                map: map,
+            });
+            google.maps.event.addListener(marker, 'click', (function (marker, i) {
+                return function () {
+                    var contenidoLabel = "<div> <b>Fecha:</b> " + locations[i].fecha + "<br><b>Latitud</b>: " + locations[i].latitud + "<br><b>Longitud:</b> " + locations[i].longitud+ "<br><b>Altitud:</b> " + locations[i].altitud+ "<br><b>Temperatura:</b> " + locations[i].temt+ "<br><b>Humedad Relativa:</b> " + locations[i].humr+ "<br> </div>";
+                    infowindow.setContent(contenidoLabel);
+                    infowindow.setOptions({ maxWidth: 200 });
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+            Markers[i] = marker;
         }
-        document.getElementById("tabla").value = ""+acum;   //Lamar la funcion  http://localhost:8080/cecytea/consulta.html?cant=1 
+        locate(0);
+    }
+
+    function locate(marker_id) {
+        var myMarker = Markers[marker_id];
+        var markerPosition = getPosition(myMarker);
+        map.setCenter(markerPosition);
+        google.maps.event.trigger(myMarker, 'click');       //Se llama el servicio http://localhost:8080/cecytea/seguimiento.html?cant=1
+    }
     
 </script>
 
+<script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAmZCnSJBCnBrJ2V70CIbX27A0yFl-06A0&callback=initMap">
+</script>

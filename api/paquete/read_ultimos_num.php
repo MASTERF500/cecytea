@@ -15,7 +15,7 @@
 
   $cantidad= $_GET['cant'];
   // Blog post query
-  $result = $post->read_ultimos_num($cantidad);
+  $result = $post->read_ultimos_num($cantidad);         //Se llama http://localhost:8080/cecytea/API/Paquete/read_ultimos_num.php?cant=3
   // Get row count
   $num = $result->rowCount();
 
@@ -34,7 +34,11 @@
         'longitud' => $longitud,
         'altitud' => $altitud,
         'temt' => $temt,
-        'humr' => $humr
+        'humr' => $humr,
+        'CO2'  => $CO2,
+        'TVOC' => $TVOC,
+        'PA'   => $PA,
+        'VOL'  => $VOL
       );
 
       // Push to "data"
@@ -51,3 +55,5 @@
       array('message' => 'No Posts Found')
     );
   }
+
+  

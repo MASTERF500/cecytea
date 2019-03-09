@@ -1,0 +1,31 @@
+Servicios
+
+Create.php
+http://localhost:8080/cecytea/api/paquete/create.php?f=2019/06/07%2000:00:00&la=35.3ff422&ln=-120.222324&al=450&t=27.2&h=41
+
+read.php
+http://localhost:8080/cecytea/API/Paquete/read.php
+
+read_ultimos_num.php
+http://localhost:8080/cecytea/API/Paquete/read_ultimos_num.php?cant=3
+
+read_single.php
+http://localhost:8080/cecytea/api/paquete/read_single.php
+
+
+
+
+consulta.html
+http://localhost:8080/cecytea/consulta.html?cant=1
+
+
+URL
+http://Localhost:8080/cecytea/api/paquete/read_ultimos_num.php?cant=
+//Esto va dentro del codigo de los servicios, si es local, si no:
+http://12.34.56.78:80:8080/cecytea/api/paquete/read_ultimos_num.php?cant=    //El puerto y la direccion pueden cambiar dependiendo la config
+
+
+Base de datos
+MySQL
+Abrir XAMP....Admin apache...Copiar la sigueinte URL
+localhost:8080/phpmyadmin/sql.php?db=cecytea&table=paquete&pos=0

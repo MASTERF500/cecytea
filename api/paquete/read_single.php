@@ -14,7 +14,7 @@
   $post = new Paquete($db);
   
   // Blog post query
-  $result = $post->read_single_ultimate();
+  $result = $post->read_single_ultimate();   //Se llama el servicio http://localhost:8080/cecytea/api/paquete/read_single.php
   // Get row count
   if($result['ultima_fecha']) {
     // Post array

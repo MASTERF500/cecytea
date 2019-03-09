@@ -11,6 +11,10 @@
         public $altitud;
         public $temt;
         public $humr;
+        public $CO2;
+        public $TVOC;
+        public $PA;
+        public $VOL;
 
         // Constructor with DB
         public function __construct($db) {
@@ -20,7 +24,7 @@
         // Get Posts
         public function read() {
         // Create query
-        $query = 'SELECT  t.fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr  FROM ' . $this->table . ' t order by t.fecha';
+        $query = 'SELECT  t.fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr,t.CO2,t.TVOC,t.PA,t.VOL,  FROM ' . $this->table . ' t order by t.fecha';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -32,7 +36,7 @@
         }
         public function read_ultimos_num($num) {
             // Create query
-            $query = 'SELECT fecha,latitud,longitud,altitud,temt,humr  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
+            $query = 'SELECT fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PA,VOL  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
             // Prepare statement
             $stmt = $this->conn->prepare($query);
     
@@ -45,7 +49,7 @@
         // Get Single Post ( se modifico el nombre) ************
         public function read_single_ultimate() {
             // Create query
-            $query = 'SELECT max(fecha) as ultima_fecha,latitud,longitud,altitud,temt,humr FROM ' . $this->table ;
+            $query = 'SELECT max(fecha) as ultima_fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PA,VOL FROM ' . $this->table ;
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -63,14 +67,18 @@
             $this->longitud = $row['longitud'];
             $this->altitud = $row['altitud'];
             $this->temt = $row['temt'];
-            $this->humr = $row['humr'];
+            $this->humr = $row['humr']:
+            $this->CO2 = $row['CO2']:
+            $this->TVOC = $row['TVOC']
+            $this->PA = $row['PA']
+            $this->VOL = $row['VOL']
             return $row;
         }
 
         // Create Post
         public function create() {
             // Create query
-            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr ';
+            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr, CO2 = :CO2, TVOC = :TVOC, PA = :PA, VOL = :VOL';
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 
@@ -80,7 +88,10 @@
             $this->longitud = htmlspecialchars(strip_tags($this->longitud));
             $this->altitud = htmlspecialchars(strip_tags($this->altitud));
             $this->temt = htmlspecialchars(strip_tags($this->temt));
-            $this->humr = htmlspecialchars(strip_tags($this->humr));
+            $this->CO2 = htmlspecialchars(strip_tags($this->CO2));
+            $this->TVOC = htmlspecialchars(strip_tags($this->TVOC));
+            $this->PA = htmlspecialchars(strip_tags($this->PA));
+            $this->VOL = htmlspecialchars(strip_tags($this->VOL));
             // Bind data
             $stmt->bindParam(':fecha', $this->fecha);
             $stmt->bindParam(':latitud', $this->latitud);
@@ -88,7 +99,10 @@
             $stmt->bindParam(':altitud', $this->altitud);
             $stmt->bindParam(':temt', $this->temt);
             $stmt->bindParam(':humr', $this->humr);
-
+            $stmt->bindParam(':CO2', $this->CO2);
+            $stmt->bindParam(':TVOC', $this->TVOC);
+            $stmt->bindParam(':PA', $this->PA);
+            $stmt->bindParam(':VOL', $this->VOL);
             //$stmt->execute();
             // Execute query
             if($stmt->execute()) {

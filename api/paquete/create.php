@@ -22,19 +22,22 @@
 
   //$post->fecha = $data->fecha;
   //$post->longitud = $data->longitud;
-  //$post->longitud = $data->longitud;
+  //$post->longitud = $data->longitud;                           
   //$post->altitud = $data->altitud;
   //$post->temt = $data->temt;
   //$post->humr = $data->humr;
-
-  //New values
+                                   //Se llama http://localhost:8080/cecytea/api/paquete/create.php
+  //New values                     //Se Crea http://localhost:8080/cecytea/api/paquete/create.php?f=2019/06/07%2000:00:00&la=35.3ff422&ln=-120.222324&al=450&t=27.2&h=41
   $post->fecha = $_GET['f'];
   $post->latitud = $_GET['la'];
   $post->longitud = $_GET['ln'];
   $post->altitud = $_GET['al'];
   $post->temt = $_GET['t'];
   $post->humr = $_GET['h'];
-
+  $post->CO2  = $_GET['co'];
+  $post->TVOC = $_get['tv'];
+  $post->PA   = $_GET['pa'];
+  $post->VOL  = $_GET['vol'];
   // Create post
   if($post->create()) {
     echo json_encode(
