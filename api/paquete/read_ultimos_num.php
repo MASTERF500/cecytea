@@ -37,8 +37,8 @@
         'humr' => $humr,
         'CO2'  => $CO2,
         'TVOC' => $TVOC,
-        'PA'   => $PA,
-        'VOL'  => $VOL
+        'PS'   => $PS,
+        'VOLT'  => $VOLT
       );
 
       // Push to "data"

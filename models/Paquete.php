@@ -13,8 +13,8 @@
         public $humr;
         public $CO2;
         public $TVOC;
-        public $PA;
-        public $VOL;
+        public $PS;
+        public $VOLT;
 
         // Constructor with DB
         public function __construct($db) {
@@ -24,7 +24,7 @@
         // Get Posts
         public function read() {
         // Create query
-        $query = 'SELECT  t.fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr,t.CO2,t.TVOC,t.PA,t.VOL,  FROM ' . $this->table . ' t order by t.fecha';
+        $query = 'SELECT  t.fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr,t.CO2,t.TVOC,t.PS,t.VOLT,  FROM ' . $this->table . ' t order by t.fecha';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -36,7 +36,7 @@
         }
         public function read_ultimos_num($num) {
             // Create query
-            $query = 'SELECT fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PA,VOL  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
+            $query = 'SELECT fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PS,VOLT  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
             // Prepare statement
             $stmt = $this->conn->prepare($query);
     
@@ -49,7 +49,7 @@
         // Get Single Post ( se modifico el nombre) ************
         public function read_single_ultimate() {
             // Create query
-            $query = 'SELECT max(fecha) as ultima_fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PA,VOL FROM ' . $this->table ;
+            $query = 'SELECT max(fecha) as ultima_fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PS,VOLT FROM ' . $this->table ;
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -70,8 +70,8 @@
             $this->humr = $row['humr']:
             $this->CO2 = $row['CO2']:
             $this->TVOC = $row['TVOC']
-            $this->PA = $row['PA']
-            $this->VOL = $row['VOL']
+            $this->PS = $row['PS']
+            $this->VOLT = $row['VOLT']
             return $row;
         }
 
@@ -90,8 +90,8 @@
             $this->temt = htmlspecialchars(strip_tags($this->temt));
             $this->CO2 = htmlspecialchars(strip_tags($this->CO2));
             $this->TVOC = htmlspecialchars(strip_tags($this->TVOC));
-            $this->PA = htmlspecialchars(strip_tags($this->PA));
-            $this->VOL = htmlspecialchars(strip_tags($this->VOL));
+            $this->PA = htmlspecialchars(strip_tags($this->PS));
+            $this->VOL = htmlspecialchars(strip_tags($this->VOLT));
             // Bind data
             $stmt->bindParam(':fecha', $this->fecha);
             $stmt->bindParam(':latitud', $this->latitud);
@@ -101,8 +101,8 @@
             $stmt->bindParam(':humr', $this->humr);
             $stmt->bindParam(':CO2', $this->CO2);
             $stmt->bindParam(':TVOC', $this->TVOC);
-            $stmt->bindParam(':PA', $this->PA);
-            $stmt->bindParam(':VOL', $this->VOL);
+            $stmt->bindParam(':PS', $this->PS);
+            $stmt->bindParam(':VOLT', $this->VOLT);
             //$stmt->execute();
             // Execute query
             if($stmt->execute()) {

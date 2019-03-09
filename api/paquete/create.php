@@ -36,8 +36,8 @@
   $post->humr = $_GET['h'];
   $post->CO2  = $_GET['co'];
   $post->TVOC = $_get['tv'];
-  $post->PA   = $_GET['pa'];
-  $post->VOL  = $_GET['vol'];
+  $post->PA   = $_GET['ps'];
+  $post->VOL  = $_GET['volt'];
   // Create post
   if($post->create()) {
     echo json_encode(

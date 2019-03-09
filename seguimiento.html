@@ -183,7 +183,7 @@
     }
     var cant = getUrlVars()["cant"];
 
-    var locations = JSON.parse(GetMaster('http://Localhost:8080/cecytea/api/paquete/read_ultimos_num.php?cant='+cant));
+    var locations = JSON.parse(GetMaster('http://localhost:9090/cecytea/api/paquete/read_ultimos_num.php?cant='+cant));
     
     
     function initMap() {
@@ -202,7 +202,7 @@
             });
             google.maps.event.addListener(marker, 'click', (function (marker, i) {
                 return function () {
-                    var contenidoLabel = "<div> <b>Fecha:</b> " + locations[i].fecha + "<br><b>Latitud</b>: " + locations[i].latitud + "<br><b>Longitud:</b> " + locations[i].longitud+ "<br><b>Altitud:</b> " + locations[i].altitud+ "<br><b>Temperatura:</b> " + locations[i].temt+ "<br><b>Humedad Relativa:</b> " + locations[i].humr+ "<br><b>CO2:</b> " + locations[i].CO2+ "<br><b>TVOC:</b> " + locations[i].TVOC+ "<br><b>PA:</b> " + locations[i].PA+ "<br><b>VOL</b> " + locations[i].VOL+ "<br> </div>";  
+                    var contenidoLabel = "<div> <b>Fecha:</b> " + locations[i].fecha + "<br><b>Latitud</b>: " + locations[i].latitud + "<br><b>Longitud:</b> " + locations[i].longitud+ "<br><b>Altitud:</b> " + locations[i].altitud+ "<br><b>Temperatura:</b> " + locations[i].temt+ "<br><b>Humedad Relativa:</b> " + locations[i].humr+ "<br><b>CO2:</b> " + locations[i].CO2+ "<br><b>TVOC:</b> " + locations[i].TVOC+ "<br><b>PA:</b> " + locations[i].PS+ "<br><b>VOLT:</b> " + locations[i].VOLT+ "<br> </div>";  
                     infowindow.setContent(contenidoLabel);
                     infowindow.setOptions({ maxWidth: 200 });
                     infowindow.open(map, marker);
