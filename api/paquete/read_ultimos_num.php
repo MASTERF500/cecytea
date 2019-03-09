@@ -13,8 +13,9 @@
   // Instantiate blog post object
   $post = new Paquete($db);
 
+  $cantidad= $_GET['cant'];
   // Blog post query
-  $result = $post->read();
+  $result = $post->read_ultimos_num($cantidad);
   // Get row count
   $num = $result->rowCount();
 
@@ -29,7 +30,7 @@
 
       $post_item = array(
         'fecha' => $fecha,
-        'altitud' => $altitud,
+        'latitud' => $latitud,
         'longitud' => $longitud,
         'altitud' => $altitud,
         'temt' => $temt,
