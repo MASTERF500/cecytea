@@ -67,11 +67,11 @@
             $this->longitud = $row['longitud'];
             $this->altitud = $row['altitud'];
             $this->temt = $row['temt'];
-            $this->humr = $row['humr']:
-            $this->CO2 = $row['CO2']:
-            $this->TVOC = $row['TVOC']
-            $this->PS = $row['PS']
-            $this->VOLT = $row['VOLT']
+            $this->humr = $row['humr'];
+            $this->CO2 = $row['CO2'];
+            $this->TVOC = $row['TVOC'];
+            $this->PS = $row['PS'];
+            $this->VOLT = $row['VOLT'];
             return $row;
         }
 
