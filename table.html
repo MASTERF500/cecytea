@@ -17,6 +17,10 @@ table, th, td {
     <th>Altitud</th>
     <th>Temperatura</th>
     <th>Humedad</th>
+    <th>CO2</th>
+    <th>TVOC</th>
+    <th>PS. AMSF.</th>
+    <th>VOLT</th>
   </tr>
   <tr>
     <td><span id="fecha"></span></td>
@@ -25,17 +29,11 @@ table, th, td {
                 <td><span id="altitud"></td>
                     <td><span id="temp"></td>
                         <td><span id="humr"></td>
+                          <td><span id="CO2"></td>
+                            <td><span id="TVOC"></td>
+                              <td><span id="PSA"></td>
+                                <td><span id="VOLT"></td>
 
-  </tr>
-  <tr>
-    <td>Eve</td>
-    <td>Jackson</td>
-    <td>94</td>
-  </tr>
-  <tr>
-    <td>John</td>
-    <td>Doe</td>
-    <td>80</td>
   </tr>
 </table>
 
@@ -67,7 +65,7 @@ table, th, td {
         }
         var cant = getUrlVars()["cant"];
     
-        var locations = JSON.parse(GetMaster('http://Localhost:8080/cecytea/api/paquete/read_ultimos_num.php?cant='+cant)); //Recordar Agregar http:// en local
+        var locations = JSON.parse(GetMaster('http://Localhost:9090/cecytea/api/paquete/read_ultimos_num.php?cant='+cant)); //Recordar Agregar http:// en local
            for (i = 0; i < locations.length; i++) {
                 acum+= "Fecha: " + locations[i].fecha + " Latitud: " + locations[i].latitud + " Longitud: " + locations[i].longitud+ " Altitud: " + locations[i].altitud+ " Temperatura: " + locations[i].temt+ " Humedad Relativa: " + locations[i].humr+ "<br> ";
             
@@ -78,7 +76,11 @@ table, th, td {
            document.getElementById("altitud").innerHTML = locations[i].altitud;
            document.getElementById("temt").innerHTML = locations[i].temt;
            document.getElementById("humr").innerHTML = locations[i].humr;
-           
+           document.getElementById("CO2").innerHTML = locations[i].CO2;
+           document.getElementById("TVOC").innerHTML = locations[i].TVOC;
+           document.getElementById("PSA").innerHTML = locations[i].PA;
+           document.getElementById("VOLT").innerHTML = locations[i].VOLT;
+          
            }
     </script>
 </body>

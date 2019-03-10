@@ -78,7 +78,7 @@
         // Create Post
         public function create() {
             // Create query
-            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr, CO2 = :CO2, TVOC = :TVOC, PA = :PA, VOL = :VOL';
+            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr, CO2 = :CO2, TVOC = :TVOC, PS = :PS, VOLT = :VOLT';
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 

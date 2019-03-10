@@ -26,7 +26,7 @@ $(document).ready(function(){
         //post with ajax
         $.ajax({
             type:"POST",
-            url: "http://localhost:8080/website/api/post/create.php",
+            url: "http://localhost:9090/website/api/post/create.php",
             data: test,
             ContentType:"application/json",
 
@@ -49,7 +49,7 @@ $(document).ready(function(){
        
        var req;
        req=new XMLHttpRequest();
-       req.open("GET", 'http://localhost:8080/website/api/post/read.php',true);
+       req.open("GET", 'http://localhost:9090/website/api/post/read.php',true);
        req.send();
       
        req.onload=function(){
