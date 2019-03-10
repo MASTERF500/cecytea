@@ -90,7 +90,7 @@
             $this->temt = htmlspecialchars(strip_tags($this->temt));
             $this->CO2 = htmlspecialchars(strip_tags($this->CO2));
             $this->TVOC = htmlspecialchars(strip_tags($this->TVOC));
-            $this->PA = htmlspecialchars(strip_tags($this->PS));
+            $this->PS = htmlspecialchars(strip_tags($this->PS));
             $this->VOL = htmlspecialchars(strip_tags($this->VOLT));
             // Bind data
             $stmt->bindParam(':fecha', $this->fecha);
