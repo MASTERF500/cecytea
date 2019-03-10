@@ -36,7 +36,7 @@
   $post->humr = $_GET['h'];
   $post->CO2  = $_GET['co'];
   $post->TVOC = $_get['tv'];
-  $post->PA   = $_GET['ps '];
+  $post->PS   = $_GET['ps '];
   $post->VOLT  = $_GET['v'];
   // Create post
   if($post->create()) {
