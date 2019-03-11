@@ -24,7 +24,7 @@
         // Get Posts
         public function read() {
         // Create query
-        $query = 'SELECT  t.fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr,t.CO2,t.TVOC,t.PS,t.VOLT,  FROM ' . $this->table . ' t order by t.fecha';
+        $query = 'SELECT  t.dato as fecha,t.latitud,t.longitud,t.altitud,t.temt,t.humr,t.CO2,t.TVOC,t.PS,t.VOLT,  FROM ' . $this->table . ' t order by t.fecha';
         
         // Prepare statement
         $stmt = $this->conn->prepare($query);
@@ -36,7 +36,7 @@
         }
         public function read_ultimos_num($num) {
             // Create query
-            $query = 'SELECT fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PS,VOLT  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
+            $query = 'SELECT dato as fecha ,latitud,longitud,altitud,temt,humr,CO2,TVOC,PS,VOLT  FROM ' . $this->table . ' order by fecha asc LIMIT 0'. $num;
             // Prepare statement
             $stmt = $this->conn->prepare($query);
     
@@ -49,7 +49,7 @@
         // Get Single Post ( se modifico el nombre) ************
         public function read_single_ultimate() {
             // Create query
-            $query = 'SELECT max(fecha) as ultima_fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PS,VOLT FROM ' . $this->table ;
+            $query = 'SELECT max(dato) as ultima_fecha,latitud,longitud,altitud,temt,humr,CO2,TVOC,PS,VOLT FROM ' . $this->table ;
 
             // Prepare statement
             $stmt = $this->conn->prepare($query);
@@ -78,7 +78,7 @@
         // Create Post
         public function create() {
             // Create query
-            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr, CO2 = :CO2, TVOC = :TVOC, PS = :PS, VOLT = :VOLT';
+            $query = 'INSERT INTO ' . $this->table . ' set fecha = :fecha, latitud = :latitud, longitud = :longitud, altitud=:altitud, temt = :temt, humr= :humr, CO2 = :CO2, TVOC = :TVOC, PS = :PS, VOLT = :VOLT, dato = (select NOW()) ';
             // Prepare statement
             $stmt = $this->conn->prepare($query);
 
