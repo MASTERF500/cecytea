@@ -10,13 +10,23 @@ Import the myblog.sql file, change the params in the config/Database.php file to
 
 ### Author
 
-Edwin Celestino
+Edwin Celestino G. A. (Project Manager)
 (magnumf500@gmail.com)
+
+### Co-Autores
+
+Giovanni Joaquín Fonseca Mendez (Developer Web BackEnd PHP - Arduino LoRa)
+Alejandro Vargaz Ortiz (Developer Web FrontEnd HTML/CSS/JavaScript - Arduino LoRa)
 
 ### Version
 
-1.0.0
+1.0.1
 
 ### License
 
 This project is licensed under the MIT License
+
+### Latest Update Information
+
+2019-03-19
+
