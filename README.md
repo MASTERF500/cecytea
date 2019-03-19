@@ -13,7 +13,7 @@ Import the myblog.sql file, change the params in the config/Database.php file to
 Edwin Celestino G. A. (Project Manager)
 (magnumf500@gmail.com)
 
-### Co-Autores
+### Co-Authors
 
 > Giovanni Joaquín Fonseca Mendez (Developer Web BackEnd PHP - Arduino LoRa)
 > Alejandro Vargaz Ortiz (Developer Web FrontEnd HTML/CSS/JavaScript - Arduino LoRa)
