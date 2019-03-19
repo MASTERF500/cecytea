@@ -15,8 +15,9 @@ Edwin Celestino G. A. (Project Manager)
 
 ### Co-Autores
 
-Giovanni Joaquín Fonseca Mendez (Developer Web BackEnd PHP - Arduino LoRa)
-Alejandro Vargaz Ortiz (Developer Web FrontEnd HTML/CSS/JavaScript - Arduino LoRa)
+> Giovanni Joaquín Fonseca Mendez (Developer Web BackEnd PHP - Arduino LoRa)
+> Alejandro Vargaz Ortiz (Developer Web FrontEnd HTML/CSS/JavaScript - Arduino LoRa)
+> CECyTEA: Planten San José de Gracia, Km 11.5 San José de Gracia, AGS 19, Ags.
 
 ### Version
 
